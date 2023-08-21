@@ -2,57 +2,119 @@
   text-align: center;
   background-color: #c5e4e7;
 }
+.App label{
+  display: flex;
+}
 
 .input-container {
   display: flex;
   align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  transition: border-color 0.3s ease;
-}
-
-/* Styling for the dollar sign */
-.input-container::before {
-  content: '$';
-  margin-right: 5px;
 }
 
 /* Styling for the input element */
 .input-container input {
   border: none;
+  background-color: #f3f8fb;
+  border-radius: 5px;
+  flex: 1;
+  padding: 8px;
+  text-align: right;
+  transition: border-color 0.3s, border-width 0.3s;
+}
+
+.input-container.focused input{
+  border: 2px solid #79d0c1;
   outline: none;
+}
+
+.number-of-people{
+  display: flex;
+  align-items: center;
+}
+
+.number-of-people-labels{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.required{
+  color: red;
+  margin-left: 10px;
+}
+.number-of-people input {
+  border: 1px solid #79d0c1;
+  border-radius: 5px;
+  background-color: #f3f8fb;
   flex: 1;
   padding: 8px;
   text-align: right;
 }
 
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 100px; /* Adjust as needed */
-  border: 1px solid #ccc;
+.invalid{
+  border: 2px solid red;
+  border-radius: 5px;
+  outline: none;
 }
 
-.left-div {
-  background-color: #e0e0e0;
-  padding: 10px;
-}
-
-.right-div {
-  background-color: #c0c0c0;
-  padding: 10px;
+.tip-percentage{
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
 }
 
 .tip-percentage button {
-  background-color: transparent;
+  background-color: #00474b;
+  width: auto;
+  color: white;
   border: none;
   cursor: pointer;
   padding: 5px 10px;
+  margin: 2px;
+  border-radius: 5px;
+}
+
+.tip-percentage input {
+  background-color: white;
+  border: 1px solid #79d0c1;
+  cursor: pointer;
+  padding: 5px 10px;
+  margin: 2px;
+  border-radius: 5px;
+  text-align: right;
 }
 
 .tip-percentage button.selected {
-  background-color: #4c8bf5;
-  color: white;
+  background-color: #9fe8df;
+  color: #00474b;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  background-color: white;
+  width: 80%;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.left-div {
+  padding: 10px;
+  margin-left: 20%;
+  height: 90%;
+}
+
+.right-div {
+  padding: 10px;
+  margin-right: 20%;
+  background-color: #00474b;
+  color:#79d0c1;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+

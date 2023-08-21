@@ -4,9 +4,9 @@ import './App.css';
 function App() {
 
   const [tip, setTip] = useState(0);
-  const [tipPercentage, setTipPercentage] = useState(0);
+  const [tipPercentage, setTipPercentage] = useState();
   const [total, setTotal] = useState(0);
-  const [bill, setBill] = useState(0);
+  const [bill, setBill] = useState();
   const [numberOfPeople, setNumberOfPeople] = useState(1);
   const [isFocused, setIsFocused] = useState(false);
   
@@ -23,6 +23,7 @@ function App() {
   };
 
   useEffect(() => {
+    if(bill&&tipPercentage&&numberOfPeople){
     // Calculate tip amount based on tip percentage and bill
     const tipAmount = (parseFloat(bill) * parseFloat(tipPercentage)) / 100;
 
@@ -33,11 +34,12 @@ function App() {
     setTip(tipAmount/numberOfPeople);
 
     setTotal(totalAmount/numberOfPeople);
+    }
   }, [tipPercentage, bill, numberOfPeople]);
 
   const resetAmounts = () => {
-    setBill(0);
-    setNumberOfPeople(0);
+    setBill();
+    setNumberOfPeople();
     setTip(0);
     setTotal(0);
   };
@@ -47,7 +49,9 @@ function App() {
       <div >
         <h2 className="logo">SPLITTER</h2>
         <div className="container">
+          
           <div className="left-div">
+          <label>Bill</label>
             <div className={`input-container ${isFocused ? 'focused' : ''}`}>
               <input 
               type="text" 
@@ -55,18 +59,24 @@ function App() {
               onChange={handleChange}
               onFocus={handleFocus}
               onBlur={handleBlur}
+              placeholder="0"
               ></input>
             </div>
-            <div class="tip-percentage">
+            <label>Select Tip %</label>
+            <div className="tip-percentage">
               <button onClick={() => setTipPercentage(5)} className={tipPercentage === 5 ? 'selected' : ''}>5%</button>
               <button onClick={() => setTipPercentage(10)} className={tipPercentage === 10 ? 'selected' : ''}>10%</button>
               <button onClick={() => setTipPercentage(15)} className={tipPercentage === 15 ? 'selected' : ''}>15%</button>
               <button onClick={() => setTipPercentage(25)} className={tipPercentage === 25 ? 'selected' : ''}>25%</button>
               <button onClick={() => setTipPercentage(50)} className={tipPercentage === 50 ? 'selected' : ''}>50%</button>
-              <input onChange={(e) => setTipPercentage(e.target.value)} value={tipPercentage} className={tipPercentage === {tipPercentage} ? 'selected' : ''}></input>
+              <input onChange={(e) => setTipPercentage(e.target.value)} value={tipPercentage} className={tipPercentage === {tipPercentage} ? 'selected' : ''} placeholder="CUSTOM"></input>
              </div>
-             <div className="number-of-people">
-              <input onChange={(e) => setNumberOfPeople(e.target.value)} value={numberOfPeople}></input>
+             <div className="number-of-people-labels">
+             <label>Number of People</label>
+             {numberOfPeople < 1 && <label className="required">Can't be Zero</label>}
+             </div>
+             <div className={`number-of-people ${numberOfPeople > 0 ? '' : 'invalid'}`}>
+              <input onChange={(e) => setNumberOfPeople(e.target.value)} value={numberOfPeople} placeholder="1"></input>
             </div>
           </div>
           <div className="right-div">
